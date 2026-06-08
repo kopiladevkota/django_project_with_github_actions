@@ -1,0 +1,39 @@
+﻿name: GitHub Actions Demo
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Print message
+        run: echo "Hello, GitHub Actions is working!"
+      
+      - name: Show current directory
+        run: pwd
+      
+      - name: List files
+        run: ls -la
+      
+      - name: Run simple test
+        run: |
+          echo "Running tests..."
+          echo "Test 1: Checking Python"
+          python --version
+          echo "Test 2: Basic math"
+          python -c "assert 1+1==2"
+          echo "✅ All tests passed!"
+      
+      - name: Success notification
+        run: |
+          echo "🎉 CI/CD Pipeline is SUCCESSFUL!"
+          echo "Workflow triggered by: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "This proves automated CI/CD is working!"
